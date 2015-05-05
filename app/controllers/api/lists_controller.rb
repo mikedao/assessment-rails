@@ -13,11 +13,14 @@ class Api::ListsController < ApplicationController
   end
 
   def destroy
-    if List.find(params[:id]).destroy
-      render json: {}, status: 200
-    else
-      render json: {}, status: 400
-    end
+    List.find(params[:id]).destroy
+    render json: {}, status: 200
+  end
+
+  def update
+    @list = List.find(params[:id])
+    @list.update(list_params)
+    render json: @list
   end
 
   private

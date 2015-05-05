@@ -40,4 +40,15 @@ class Api::ListsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should be able to update an item" do
+    list = List.create(title: "Food", active: true)
+    id = list.id.to_s
+
+    put(:update, {"list"=>{"title"=>"new list", "active"=>true}, "id"=>list.id})
+    result = JSON.parse(response.body)
+
+
+    assert_response :success
+    assert_equal "new list", result["list"]["title"]
+  end
 end
