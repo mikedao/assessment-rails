@@ -1,0 +1,11 @@
+<div class="list-index">
+  <ul>
+    {{#each list in model}}
+    {{#if list.active }}
+    <li>{{link-to list.title 'lists.show' list }} {{list.active}}</li>
+    {{/if}}
+    {{/each}}
+  </ul>
+</div>
+{{outlet}}
+
