@@ -3,6 +3,8 @@ class List < ActiveRecord::Base
   has_many :tasks
 
   def set_active
-    self.active = true
+    if self.active.nil?
+      self.active = true
+    end
   end
 end
