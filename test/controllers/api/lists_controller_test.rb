@@ -23,4 +23,21 @@ class Api::ListsControllerTest < ActionController::TestCase
     assert_equal "Food", result["list"]["title"]
   end
 
+  test "should be able to create an item" do
+    put(:create, {"list" => {"title"=>"new list", "active"=>true}})
+    result = JSON.parse(response.body)
+
+    assert_response :success
+    assert_equal "new list", result["list"]["title"]
+  end
+
+  test "should be able to destroy an item" do
+    list = List.create(title: "Food", active: true)
+    id = list.id.to_s
+
+    delete(:destroy, {"id" => id})
+
+    assert_response :success
+  end
+
 end
